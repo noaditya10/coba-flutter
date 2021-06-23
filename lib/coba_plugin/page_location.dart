@@ -51,14 +51,18 @@ class _PageLokasiState extends State<PageLokasi> {
 
       return;
     }
-
+    print('mulai Timer');
     tmr = Timer.periodic(Duration(seconds: 2), (t) async {
-      tmr = t;
-      lokasiTerkini = await Geolocator.getCurrentPosition();
-
-      latLngTerkini =
-          LatLng(lokasiTerkini?.latitude ?? 0, lokasiTerkini?.longitude ?? 0);
-
+      try {
+        tmr = t;
+        lokasiTerkini = await Geolocator.getCurrentPosition();
+        print('lokasi terkini $lokasiTerkini');
+        latLngTerkini =
+            LatLng(lokasiTerkini?.latitude ?? 0, lokasiTerkini?.longitude ?? 0);
+        print('latlng terkini $latLngTerkini');
+      } catch (e) {
+        print('error $e');
+      }
       setState(() {});
     });
 
